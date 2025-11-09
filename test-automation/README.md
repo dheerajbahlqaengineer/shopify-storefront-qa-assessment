@@ -1,56 +1,37 @@
-# 🚀 Executable Test Automation
+# Test Automation - Strategic Focus
 
-## Quick Start (5 minutes to running tests)
+## Testing Reality
+**Credentials Status:** Not provided in assessment materials  
+**Testing Approach:** UI/Component validation + mocked integrations
 
+## What We CAN Test (Without Credentials)
+
+### 1. User Interface Validation
+- Product grid rendering and layout
+- Navigation flow consistency
+- Cart management interfaces
+- Loading states and error handling
+
+### 2. Business Logic Testing
+- Cart calculation accuracy
+- Product filtering and sorting
+- State management (Redux)
+- Cross-platform behavior
+
+### 3. Component Integration
+- React Native component interactions
+- Navigation stack validation
+- Platform-specific UI adaptations
+
+## Framework Architecture
+The automation framework is designed to:
+- Validate front-end functionality comprehensively
+- Provide mocked back-end for flow testing
+- Easily integrate real credentials when available
+- Maintain test reliability across iOS and Android
+
+## Quick Start
 ```bash
-# 1. Clone and setup
-git clone https://github.com/dheerajbahlqaengineer/shopify-storefront-qa-assessment
-cd shopify-storefront-qa-assessment/test-automation
-
-# 2. Install dependencies
+cd test-automation
 npm install
-
-# 3. Setup Android Emulator
-# - Open Android Studio
-# - Create Pixel 4 API 30 emulator
-# - Start emulator
-
-# 4. Build Shopify app and place APK in apps/
-# - Build command: cd ../storefrontDemo && npx react-native run-android
-# - Copy APK to test-automation/apps/shopify-app-debug.apk
-
-# 5. Run tests
-npm run test:android
-Required Setup
-Node.js 16+
-
-Android Studio with emulator
-
-Built Shopify APK in apps/ folder
-
-Test Execution Evidence
-Check ../artifacts/ folder for:
-
-Screenshots of test execution
-
-Defect evidence with reproduction steps
-
-CI workflow configuration
-
-Core Test Scenarios (Verified Working)
-✅ View product list
-
-✅ View product details
-
-✅ Add product to cart
-
-✅ Remove product from cart
-
-✅ Cart calculations
-
-✅ Navigation flows
-
-Defects Found & Documented
-DEFECT-001: Cart badge inconsistency
-
-DEFECT-002: iOS navigation styling
+npm run test:android    # UI validation tests
