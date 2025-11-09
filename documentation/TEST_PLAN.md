@@ -1,102 +1,48 @@
 # Test Plan: Shopify Storefront Mobile App
 
-## 1. Overview
-This test plan outlines the comprehensive testing strategy for the Shopify Storefront React Native application provided in the assessment.
+## 1. Overview & Scope
+**Application:** Shopify Storefront React Native App  
+**Testing Focus:** Core shopping functionality across iOS & Android  
+**Timeframe:** 4-hour assessment focus
 
 ## 2. Test Objectives
-- Validate core shopping functionality (browsing, cart management, calculations)
-- Ensure cross-platform consistency (iOS & Android)
-- Identify functional defects and usability issues
-- Verify data integrity and calculation accuracy
+- Validate product browsing, cart management, and order calculations
+- Ensure cross-platform consistency (iOS Simulator & Android Emulator)
+- Identify functional defects in revenue-critical flows
 
-## 3. Key Test Scenarios
+## 3. Test Approach
+**Automated (70%):** Core user journeys using WebdriverIO + Appium  
+**Manual (30%):** Exploratory testing, usability, edge cases  
+**Platforms:** iOS Simulator (iPhone 15), Android Emulator (Pixel 4)
 
-### 3.1 Core Functional Scenarios
-1. **Collection Browsing**
-   - Load and display collections list
-   - Navigate to product lists
-   - Handle empty collections state
+## 4. Test Scenarios & Coverage
 
-2. **Product Discovery**
-   - Two-column product grid display
-   - Product details access and information display
-   - Image loading and rendering
+### Core Required Scenarios (100% Automated)
+| Scenario | Test Case | Automated | Status |
+|----------|-----------|-----------|---------|
+| View product list | TC-001 | ✅ test-automation/tests/products/list.test.js | Implemented |
+| View product details | TC-002 | ✅ test-automation/tests/products/details.test.js | Implemented |
+| Add product to cart | TC-003 | ✅ test-automation/tests/cart/add.test.js | Implemented |
+| Remove product from cart | TC-004 | ✅ test-automation/tests/cart/remove.test.js | Implemented |
 
-3. **Cart Management**
-   - Add products to cart
-   - Update quantities
-   - Remove items from cart
-   - Cart badge counter updates
-
-4. **Order Calculations**
-   - Subtotal calculations
-   - Tax calculations
-   - Total amount accuracy
-
-### 3.2 Edge Cases & Negative Testing
-- Network failure scenarios
+### Additional Scenarios (Automated)
+- Cart calculations (subtotal, tax, total)
 - Empty cart state handling
-- Rapid sequential user actions
-- Products with missing data
-- Cross-platform behavior differences
+- Multiple product management
+- Navigation flow validation
 
-## 4. Testing Approach
+## 5. Assumptions & Constraints
+- App built and available as APK/IPA
+- iOS Simulator & Android Emulator available
+- Shopify API accessible with test products
+- 4-hour time constraint for assessment
 
-### 4.1 Automated Testing (40%)
-- **Tools**: Detox + WebdriverIO + Appium
-- **Coverage**: Core user journeys and regression tests
-- **Platforms**: iOS Simulator & Android Emulator
+## 6. Entry/Exit Criteria
+**Entry:** App built, emulators running, dependencies installed  
+**Exit:** All core scenarios automated and executed, defects documented  
+**Success:** 100% required scenarios automated and passing
 
-### 4.2 Manual Testing (60%)
-- **Focus**: Exploratory testing, usability, edge cases
-- **Coverage**: Platform-specific behaviors, visual validation
-- **Documentation**: Detailed bug reports with evidence
-
-## 5. Assumptions
-- Shopify Storefront API is available and stable
-- Test products exist in the connected store
-- App supports both iOS and Android platforms
-- No authentication required for basic shopping flows
-
-## 6. Success Criteria
-- All core shopping scenarios function correctly
-- No critical defects in revenue-impacting flows
-- Cross-platform consistency achieved
-- Automated test suite with 90%+ pass rate
-
-## 7. Test Environment
-- **iOS**: iPhone 15 Simulator (iOS 17)
-- **Android**: Pixel 4 Emulator (API 30)
-- **React Native**: 0.72.6
-- **Testing Tools**: Detox, Appium, WebdriverIO
-
-## 8. Risk Assessment
-### High Risk
-- Cart calculation inaccuracies
-- Checkout flow failures
-- Data persistence issues
-
-### Medium Risk
-- UI rendering inconsistencies
-- Performance degradation
-- Navigation flow breaks
-
-## 11. Security Testing Considerations
-
-### 11.1 Security Test Areas Covered
-- **Input Validation**: Special character handling in user inputs
-- **Session Security**: App state persistence and recovery
-- **Error Handling**: Graceful degradation on unexpected conditions
-
-### 11.2 Security Testing Approach
-While comprehensive security testing requires specialized tools and environments, our automation includes:
-- Basic input sanitization validation
-- Session management testing
-- Error condition handling
-- API response validation (conceptual)
-
-Note: Full security testing would require:
-- Penetration testing tools (OWASP ZAP, Burp Suite)
-- Static code analysis
-- Dynamic application security testing
-- Network security validation
+## 7. Risk Analysis
+**High:** Cart calculation accuracy, cross-platform consistency  
+**Medium:** Network handling, image loading performance  
+**Low:** UI alignment, minor visual issues

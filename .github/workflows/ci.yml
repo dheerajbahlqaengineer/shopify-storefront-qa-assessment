@@ -1,0 +1,81 @@
+name: Mobile Test Automation CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-android:
+    name: Test Android
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: test-automation/package-lock.json
+        
+    - name: Install dependencies
+      run: |
+        cd test-automation
+        npm ci
+        
+    - name: Setup Android Emulator
+      uses: reactivecircus/android-emulator-runner@v2
+      with:
+        api-level: 30
+        target: google_apis
+        arch: x86_64
+        profile: Pixel 4
+        force-avd-creation: false
+        emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+        
+    - name: Run Android Tests
+      run: |
+        cd test-automation
+        npm run test:android-ci
+      continue-on-error: true
+      
+    - name: Upload test results
+      uses: actions/upload-artifact@v3
+      with:
+        name: android-test-results
+        path: |
+          test-automation/artifacts/
+          test-automation/allure-results/
+        retention-days: 7
+
+  test-reports:
+    name: Generate Test Report
+    runs-on: ubuntu-latest
+    needs: test-android
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Download test results
+      uses: actions/download-artifact@v3
+      with:
+        name: android-test-results
+        
+    - name: Generate Allure Report
+      uses: simple-elf/allure-report-action@master
+      if: always()
+      with:
+        allure_results: allure-results
+        allure_report: allure-report
+        gh_pages: gh-pages
+        
+    - name: Upload Allure Report
+      uses: actions/upload-artifact@v3
+      with:
+        name: allure-report
+        path: allure-report

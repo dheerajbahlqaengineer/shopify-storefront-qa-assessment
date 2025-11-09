@@ -1,64 +1,56 @@
-# Test Automation Framework Reference
+# 🚀 Executable Test Automation
 
-## Overview
-This directory contains the reference implementation for automated end-to-end testing using Detox. While manual testing provides comprehensive coverage, this automation framework ensures regression protection for critical user journeys.
+## Quick Start (5 minutes to running tests)
 
-## Framework Setup
-### Prerequisites
-- Node.js 14.5.0 or higher
-- iOS Simulator (for iOS testing)
-- Android Emulator (for Android testing)
-- React Native development environment
+```bash
+# 1. Clone and setup
+git clone https://github.com/dheerajbahlqaengineer/shopify-storefront-qa-assessment
+cd shopify-storefront-qa-assessment/test-automation
 
-### Installation
-\`\`\`bash
-# Install dependencies
-npm install --save-dev detox@20.0.0 jest@29.0.0 jest-circus@29.0.0
+# 2. Install dependencies
+npm install
 
-# Install Detox CLI globally
-npm install -g detox-cli
+# 3. Setup Android Emulator
+# - Open Android Studio
+# - Create Pixel 4 API 30 emulator
+# - Start emulator
 
-# Initialize Detox configuration
-detox init -r jest
-\`\`\`
+# 4. Build Shopify app and place APK in apps/
+# - Build command: cd ../storefrontDemo && npx react-native run-android
+# - Copy APK to test-automation/apps/shopify-app-debug.apk
 
-## Test Scenarios Covered
+# 5. Run tests
+npm run test:android
+Required Setup
+Node.js 16+
 
-### 1. Core User Journeys
-- Collection browsing and navigation
-- Product discovery and details viewing
-- Cart management (add/remove/update quantities)
-- Order calculations and summary
+Android Studio with emulator
 
-### 2. Critical Business Logic
-- Price calculations accuracy
-- Cart state persistence
-- Navigation flow integrity
-- Error handling scenarios
+Built Shopify APK in apps/ folder
 
-### 3. Edge Cases
-- Empty states handling
-- Network failure scenarios
-- Rapid user interactions
-- Data boundary conditions
+Test Execution Evidence
+Check ../artifacts/ folder for:
 
-## Test Execution
-\`\`\`bash
-# Build the app for testing
-detox build --configuration ios.sim.debug
+Screenshots of test execution
 
-# Run tests
-detox test --configuration ios.sim.debug
+Defect evidence with reproduction steps
 
-# For Android
-detox build --configuration android.emu.debug
-detox test --configuration android.emu.debug
-\`\`\`
+CI workflow configuration
 
-## Key Test Files
-- \`e2e/tests/app.e2e.js\` - Main test scenarios
-- \`page-objects/\` - Screen-specific selectors and actions
-- \`utils/\` - Helper functions and utilities
+Core Test Scenarios (Verified Working)
+✅ View product list
 
-## Continuous Integration
-The tests are designed to run in CI/CD pipelines with proper simulator/emulator setup and test reporting.
+✅ View product details
+
+✅ Add product to cart
+
+✅ Remove product from cart
+
+✅ Cart calculations
+
+✅ Navigation flows
+
+Defects Found & Documented
+DEFECT-001: Cart badge inconsistency
+
+DEFECT-002: iOS navigation styling
