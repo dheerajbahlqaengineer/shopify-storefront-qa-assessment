@@ -1,12 +1,40 @@
+const { browser, $, $$, expect } = require('@wdio/globals');
+const ProductListPage = require('../../page-objects/ProductListPage');
+
 describe('Product List Tests', () => {
-    it('should display product list', async () => {
-        console.log('✅ Product list test would execute here');
-        // In real execution, this would interact with the app
-        expect(true).toBe(true);
+    let productListPage;
+
+    before(async () => {
+        productListPage = new ProductListPage();
     });
 
-    it('should navigate to product details', async () => {
-        console.log('✅ Product details navigation test would execute here');
-        expect(true).toBe(true);
+    it('should display product list with multiple products', async () => {
+        await productListPage.open();
+        await productListPage.waitForProductGrid();
+        
+        const productCount = await productListPage.getProductCount();
+        expect(productCount).toBeGreaterThan(0);
+        
+        const firstProductName = await productListPage.getFirstProductName();
+        expect(firstProductName).toBeTruthy();
+    });
+
+    it('should navigate to product details when product is clicked', async () => {
+        await productListPage.open();
+        await productListPage.clickFirstProduct();
+        
+        // Verify navigation to product details
+        await expect($('~product-detail-page')).toBeDisplayed();
+        await expect($('~product-title')).toBeDisplayed();
+    });
+
+    it('should display product images and prices', async () => {
+        await productListPage.open();
+        
+        const hasProductImages = await productListPage.areProductImagesDisplayed();
+        const hasProductPrices = await productListPage.areProductPricesDisplayed();
+        
+        expect(hasProductImages).toBe(true);
+        expect(hasProductPrices).toBe(true);
     });
 });
