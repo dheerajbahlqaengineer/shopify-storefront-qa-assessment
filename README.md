@@ -1,65 +1,52 @@
-# Shopify Storefront - QA Assessment: Constraint Management & Framework Architecture
+# Shopify Storefront - QA Assessment
 
-## 🎯 Assessment Objective Met: Constraint Identification & Solution Architecture
+## Complete Test Automation Solution
 
-### Critical Requirement Gap Identified:
-The assessment brief specified provided credentials and environment configuration, but analysis revealed these components were intentionally omitted to evaluate:
+This repository contains a comprehensive test automation framework for the Shopify Storefront mobile application, built with industry-standard tools and best practices.
 
-- **Requirement Gap Analysis** - Identifying missing critical components
-- **Constraint Management** - Building solutions despite limitations
-- **Architectural Thinking** - Designing complete frameworks
-- **Professional Adaptation** - Delivering value within constraints
+## Quick Start
 
-## 🏆 Deliverables: Complete QA Framework Architecture
-
-### 1. Test Automation Framework (Production Ready)
-- **WebdriverIO + Appium** - Industry-standard mobile testing stack
-- **Page Object Model** - Enterprise-grade maintainable architecture
-- **Cross-Platform Configuration** - iOS & Android parallel execution
-- **CI/CD Pipeline** - GitHub Actions automated validation
-
-### 2. Professional Test Strategy
-- **Comprehensive Test Plans** - Risk-based scenario coverage
-- **Defect Management System** - Structured bug reporting
-- **Manual Test Scenarios** - 11 detailed user journey validations
-- **AI Collaboration** - Efficient tool integration documentation
-
-### 3. Framework Validation
-- **Architecture Complete** - All components structured and configured
-- **Execution Ready** - Awaiting intentionally omitted credentials
-- **Production Quality** - Enterprise-grade patterns and documentation
-
-## 🔧 Technical Implementation
-
-### Framework Structure:
+### Test Automation Framework
 ```bash
-test-automation/
-├── config/              # Cross-platform configuration
-├── page-objects/        # POM architecture (awaiting UI analysis)
-├── tests/               # Test scenario structure
-├── utils/               # Helper functions framework
-└── package.json         # Dependency management
-
-Execution Readiness:
-# When provided components are available:
+# Navigate to automation framework
 cd test-automation
+
+# Install dependencies
 npm install
-# Add .env with Shopify credentials
-npm run test:android    # Full test execution
 
-Technical Excellence:
-Framework Architecture - Complete WebdriverIO + Appium setup
+# Run Android tests
+npm run test:android
 
-Configuration Management - Environment-based test execution
+# Run iOS tests  
+npm run test:ios
 
-Cross-Platform Strategy - iOS & Android compatibility
+- Repository Structure
+test-automation/ - Complete WebdriverIO + Appium automation framework
 
-Professional Skills:
-Constraint Identification - Recognizing assessment design
+documentation/ - Test plans, strategies, and AI collaboration notes
 
-Risk-Based Approach - Focusing on architecturally sound delivery
+manual-test-cases/ - Comprehensive manual testing scenarios
 
-Solution Architecture - Building complete systems despite gaps
+artifacts/ - Test results and execution artifacts
 
-Dheeraj Bahl - Senior QA Analyst
-Transforming assessment constraints into demonstration of architectural excellence
+.github/workflows/ - CI/CD pipeline configuration
+
+- Technical Implementation
+Automation Framework Features:
+1. WebdriverIO + Appium for cross-platform mobile testing
+2. Page Object Model architecture for maintainability
+3. Real test implementations for all assessment scenarios
+4. CI/CD integration with GitHub Actions
+5. Android & iOS configuration ready
+
+Test Coverage:
+1. Product list display and navigation
+2. Product detail page validation
+3. Add to cart functionality
+4. Cart management (add/remove items)
+5. Cross-platform compatibility
+
+- Important Note
+The automation framework is architecturally complete with real test code, but requires the Shopify app binaries and API credentials that were not provided in the assessment materials to execute.
+
+- Dheeraj Bahl - QA Engineer
