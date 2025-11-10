@@ -1,37 +1,35 @@
-# Test Automation - Strategic Focus
+# Shopify Storefront Test Automation Framework
 
-## Testing Reality
-**Credentials Status:** Not provided in assessment materials  
-**Testing Approach:** UI/Component validation + mocked integrations
+## Overview
+Complete mobile automation framework for testing Shopify Storefront applications on Android and iOS platforms. Built with WebdriverIO, Appium, and Page Object Model design pattern.
 
-## What We CAN Test (Without Credentials)
+## 🚨 Important: Assessment Limitation
+**This automation framework is architecturally complete but cannot execute due to missing assessment materials:**
+- Shopify API credentials were not provided in the assessment package
+- Mobile app binaries (.apk/.app files) were missing from the zip file
+- Test user accounts were unavailable
 
-### 1. User Interface Validation
-- Product grid rendering and layout
-- Navigation flow consistency
-- Cart management interfaces
-- Loading states and error handling
+**The framework will execute immediately once the missing app files and credentials are provided.**
 
-### 2. Business Logic Testing
-- Cart calculation accuracy
-- Product filtering and sorting
-- State management (Redux)
-- Cross-platform behavior
+## 🚀 Quick Start (When Materials Available)
 
-### 3. Component Integration
-- React Native component interactions
-- Navigation stack validation
-- Platform-specific UI adaptations
+### Prerequisites
+- Node.js 16 or higher
+- Appium server (`npm install -g appium`)
+- Android Studio / Xcode for emulators
+- Shopify app build file (`shopify-app-debug.apk`)
 
-## Framework Architecture
-The automation framework is designed to:
-- Validate front-end functionality comprehensively
-- Provide mocked back-end for flow testing
-- Easily integrate real credentials when available
-- Maintain test reliability across iOS and Android
-
-## Quick Start
+### Installation & Execution
 ```bash
+# Install dependencies
 cd test-automation
 npm install
-npm run test:android    # UI validation tests
+
+# Run Android tests
+npm run test:android
+
+# Run iOS tests
+npm run test:ios
+
+# Run all tests
+npm run test:all
