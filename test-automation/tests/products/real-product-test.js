@@ -1,27 +1,67 @@
-const { browser, $, expect } = require('@wdio/globals');
+const { browser, $, $$, expect } = require('@wdio/globals');
+const ProductListPage = require('../../page-objects/ProductListPage');
+const ProductDetailPage = require('../../page-objects/ProductDetailPage');
+const CartPage = require('../../page-objects/CartPage');
 
 describe('Real Product Tests - Core Shopping Flow', () => {
-    it('should verify app launches and shows product interface', async () => {
-        // This would actually interact with a real app
-        console.log('🚀 If app was provided, this would:');
-        console.log('   - Launch the Shopify app');
-        console.log('   - Wait for product grid to load');
-        console.log('   - Verify product cards are displayed');
-        console.log('   - Take screenshots as evidence');
-        
-        // Placeholder for real assertions
-        expect(true).toBe(true);
+    let productListPage, productDetailPage, cartPage;
+
+    before(async () => {
+        productListPage = new ProductListPage();
+        productDetailPage = new ProductDetailPage();
+        cartPage = new CartPage();
     });
 
-    it('should demonstrate cart functionality workflow', async () => {
-        console.log('🛒 If app was provided, this would:');
-        console.log('   - Tap on a product');
-        console.log('   - Click "Add to Cart"');
-        console.log('   - Verify cart badge updates');
-        console.log('   - Navigate to cart screen');
-        console.log('   - Validate item appears in cart');
+    it('should complete add to cart workflow', async () => {
+        // Navigate to product list
+        await productListPage.open();
+        await productListPage.waitForProductGrid();
         
-        // Real test logic would go here
-        expect(true).toBe(true);
+        // Select first product
+        await productListPage.clickFirstProduct();
+        await productDetailPage.waitForPageLoad();
+        
+        // Get product details
+        const productName = await productDetailPage.getProductName();
+        const productPrice = await productDetailPage.getProductPrice();
+        
+        // Add to cart
+        await productDetailPage.clickAddToCart();
+        await productDetailPage.waitForAddToCartConfirmation();
+        
+        // Verify cart updates
+        const cartCount = await productDetailPage.getCartItemCount();
+        expect(cartCount).toBe('1');
+        
+        // Navigate to cart and verify item
+        await cartPage.open();
+        const cartItems = await cartPage.getCartItems();
+        expect(cartItems).toContain(productName);
+    });
+
+    it('should remove product from cart', async () => {
+        await cartPage.open();
+        const initialItemCount = await cartPage.getCartItemCount();
+        
+        if (parseInt(initialItemCount) > 0) {
+            await cartPage.removeFirstItem();
+            await cartPage.waitForCartUpdate();
+            
+            const finalItemCount = await cartPage.getCartItemCount();
+            expect(parseInt(finalItemCount)).toBeLessThan(parseInt(initialItemCount));
+        }
+    });
+
+    it('should verify product details page elements', async () => {
+        await productListPage.open();
+        await productListPage.clickFirstProduct();
+        
+        await expect(productDetailPage.productTitle).toBeDisplayed();
+        await expect(productDetailPage.productPrice).toBeDisplayed();
+        await expect(productDetailPage.productDescription).toBeDisplayed();
+        await expect(productDetailPage.addToCartButton).toBeDisplayed();
+        
+        const isAddToCartEnabled = await productDetailPage.isAddToCartEnabled();
+        expect(isAddToCartEnabled).toBe(true);
     });
 });
